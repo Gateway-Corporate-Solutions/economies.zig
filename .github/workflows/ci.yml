@@ -1,0 +1,19 @@
+name: CI
+on:
+  push:
+  pull_request:
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        optimize: [Debug, ReleaseSafe]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: mlugg/setup-zig@v2
+        with:
+          version: 0.16.0
+      - run: zig fmt --check build.zig src examples bench
+      - run: zig build all -Doptimize=${{ matrix.optimize }} --summary all
+      - run: zig build test -Doptimize=${{ matrix.optimize }} --test-timeout 30s --summary all

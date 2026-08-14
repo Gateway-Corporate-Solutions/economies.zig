@@ -1,0 +1,23 @@
+#!/bin/sh
+set -eu
+
+project_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+
+: "${ZIG_LOCAL_CACHE_DIR:=$project_dir/.zig-cache-local}"
+: "${ZIG_GLOBAL_CACHE_DIR:=$project_dir/.zig-cache-global}"
+export ZIG_LOCAL_CACHE_DIR ZIG_GLOBAL_CACHE_DIR
+
+if [ ! -e /proc/self/exe ] && [ -x "$project_dir/../.tools/zig-0.16.0/zig-sandbox" ]; then
+    # ChatGPT Work sandboxes do not expose procfs. This workspace-only compiler
+    # copy uses the adjacent zig-self-000 link for executable discovery.
+    zig_bin="$project_dir/zig-self-000"
+elif command -v zig >/dev/null 2>&1; then
+    zig_bin=$(command -v zig)
+elif [ -x "$project_dir/../.tools/zig-0.16.0/zig" ]; then
+    zig_bin="$project_dir/../.tools/zig-0.16.0/zig"
+else
+    echo "Zig 0.16.0 is not installed. See README.md for installation instructions." >&2
+    exit 1
+fi
+
+exec "$zig_bin" "$@"

@@ -1,0 +1,7 @@
+/.zig-cache/
+/.zig-cache-local/
+/.zig-cache-global/
+/zig-out/
+/zig-pkg/
+/.vscode/
+/zig-self-000

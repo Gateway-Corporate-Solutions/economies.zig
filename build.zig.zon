@@ -1,0 +1,22 @@
+.{
+    .name = .economies,
+    .version = "0.1.0-dev.1",
+    .fingerprint = 0xa537a5b2965fe532, // Changing this has security and trust implications.
+    .minimum_zig_version = "0.16.0",
+    .dependencies = .{},
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+        "src",
+        "examples",
+        "bench",
+        "docs",
+        "README.md",
+        "LICENSE",
+        "CONTRIBUTING.md",
+        "GOVERNANCE.md",
+        "SECURITY.md",
+        "CITATION.cff",
+        "CHANGELOG.md",
+    },
+}

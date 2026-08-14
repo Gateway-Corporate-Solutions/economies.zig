@@ -1,0 +1,7 @@
+cff-version: 1.2.0
+title: economies.zig
+message: "If you use this software, cite the archived release and the model-specific references in its validation report."
+type: software
+version: 0.1.0-dev.1
+license: Apache-2.0
+abstract: "Deterministic economic simulation, exact accounting, and point-in-time backtesting for Zig."
